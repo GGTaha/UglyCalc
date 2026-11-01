@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">    
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>UglyCalc</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <h1>Welcome to UglyCalc.</h1>
+        <h1>(Calc is short for Calculator)</h1>
+        <div class="calculator">
+            <div id="display">0</div>
+            <div id="keypad"></div>
+        </div>
+        
+       <div id="captcha" class="hidden">
+        <h2>WAIT! Prove you are worthy of math:</h2>
+        <p id="captcha-question">Equation goes here...</p>
+        <input type="number" id="captcha-input" placeholder="Catch me">
+        <br><br>
+        <button id="captcha-submit">Unlock Answer</button>
+    </div>  
+
+
+        <script src="script.js"></script>
+
+    </body>
+</html>
