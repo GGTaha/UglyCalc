@@ -4,6 +4,10 @@
     padding: 0;
     background-color: #fc5dca;
 }
+.hidden {
+    display: none;
+}
+
 h1{
     text-align: right;
     color: #e60000;
@@ -53,4 +57,44 @@ h1{
     color: #ff0084;
     background-color: #0008fa;
 
+}
+
+.hidden {
+    display: none;
+}
+
+#captcha {
+    position: fixed;
+    top: 30%;
+    left: 35%;
+    z-index: 999; 
+
+    width: 300px;
+    padding: 20px;
+    background-color: #ff0055;
+    color: #00ffcc;
+    border: 8px ridge #ffff00;
+    text-align: center;
+    font-family: "Comic Sans MS", cursive;
+
+
+    animation: orbit 5s linear infinite;
+}
+
+#captcha-input {
+    padding: 10px;
+    font-size: 18px;
+    width: 140px;
+    background-color: #ffff00;
+    border: 4px solid #0000ff;
+}
+
+@keyframes orbit {
+    from {
+        transform: rotate(0deg) translateX(150px) rotate(0deg);
+    }
+    to {
+       
+        transform: rotate(360deg) translateX(150px) rotate(-360deg);
+    }
 }

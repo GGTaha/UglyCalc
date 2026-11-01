@@ -1,7 +1,13 @@
 const keypad = document.getElementById('keypad');
 const display = document.getElementById('display');
+const calculator = document.querySelector('.calculator');
+const captcha = document.getElementById('captcha');
+const captchaQuestion = document.getElementById('captcha-question');
+const captchaInput = document.getElementById('captcha-input');
+const captchaSubmit = document.getElementById('captcha-submit');
 
-let currentExpression = "0";
+let currentExpression = "";
+let realCaptchaAnswer = 0;
 
 const buttons = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '+', '-', '*', '/', '=', 'C'];
 
@@ -13,7 +19,6 @@ function shuffleButtons(arr) {
     }
     return copy;
 }
-
 
 function renderKeypad() {
     keypad.innerHTML = "";
@@ -38,12 +43,44 @@ function handleButtonClick(char) {
         currentExpression = "";
         display.textContent = "0";
     } else if (char === '=') {
-        // Trigger Captcha stage (we'll implement this next)
-        alert("Verification required!");
+        if (currentExpression === "") return;
+        startCaptcha();
     } else {
         currentExpression += char;
         display.textContent = currentExpression;
     }
 }
 
+function startCaptcha() {
+    const a = Math.floor(Math.random() * 15) + 3; // 3 to 17
+    const b = Math.floor(Math.random() * 12) + 2; // 2 to 13
+    const c = Math.floor(Math.random() * 40) + 10; // 10 to 49
+    const d = Math.floor(Math.random() * 25) + 5; // 5 to 29
+
+    realCaptchaAnswer = (a * b) - c + d;
+
+    // Show the question on the orbiting box
+    captchaQuestion.textContent = `Solve: (${a} × ${b}) - ${c} + ${d}`;
+    captchaInput.value = ""; // Clear any old answer
+    captcha.classList.remove('hidden'); // Release the orbiting box
+}
+
 renderKeypad();
+
+captchaSubmit.addEventListener('click', () => {
+    const userGuess = Number(captchaInput.value);
+
+    if (captchaInput.value === "" || userGuess !== realCaptchaAnswer) {
+        alert("WRONG! Do you even math? Try a new one.");
+        startCaptcha(); 
+        return;
+    }
+
+    captcha.classList.add('hidden');
+
+    // Generate a completely absurd answer for their original calculator input
+    const absurdNumber = (Math.random() * 1000000 - 500000).toFixed(3);
+    
+    display.textContent = absurdNumber;
+    currentExpression = absurdNumber; // Lets them keep doing math with the fake number
+});
